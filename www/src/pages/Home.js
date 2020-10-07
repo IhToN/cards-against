@@ -8,6 +8,7 @@ import CardStyles from '../components/deck-edit/CardStyles'
 import InputStyles from '../components/Input'
 import CardFlip from '../components/CardFlip'
 import bg from '../assets/humaaans.png';
+import {useTranslations} from "../components/Localise";
 
 const HomeStyles = styled.div`
   display: flex;
@@ -122,6 +123,7 @@ export default function Home ({ navigate }) {
   const [isRotated, setIsRotated] = useState(false)
   const [code, setCode] = useState('')
   const [currentUser, setCurrentUser] = useGlobalSlice('currentUser')
+  const {getTranslation} = useTranslations()
 
   function goTo (id) {
     navigate(`/game/${id}`)
@@ -149,12 +151,12 @@ export default function Home ({ navigate }) {
           <CardStyles as="button"
             onClick={leaveGame}
             className="white scale">
-            Abandonar partida
+            {getTranslation("views.home.leave")}
           </CardStyles>
           <CardStyles as="button"
             onClick={continueGame}
             className="black scale">
-            Continuar partida
+            {getTranslation("views.home.continue")}
           </CardStyles>
         </div>
       ) : (
@@ -163,12 +165,12 @@ export default function Home ({ navigate }) {
             <CardStyles as="button"
               onClick={() => setIsRotated(true)}
               className="card-flip-elem card-flip-front card white scale">
-              Unirse a una partida
+                {getTranslation("views.home.join")}
             </CardStyles>
             <CardStyles as="form"
               onSubmit={enterGame}
               className="card-flip-elem card-flip-back card white">
-              <label>Introduce el código</label>
+              <label>{getTranslation("views.home.code_input")}</label>
               <div className="input-group">
                 <InputStyles
                   type="text"
@@ -184,7 +186,7 @@ export default function Home ({ navigate }) {
           <CardStyles as="button"
             onClick={() => navigate('/newgame')}
             className="black scale">
-            Crear partida
+              {getTranslation("views.home.create")}
           </CardStyles>
         </div>
       )}
